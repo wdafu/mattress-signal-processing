@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hospital.patient.wx.api.db.dao.MattressDao">
+
+
+    <insert id="insertFuData" parameterType="com.example.hospital.patient.wx.api.db.pojo.MattressDataEntity">
+        INSERT INTO deviceSM(
+            heartbeat,breath,OSA,sleep_stage,state,HRV,device_num,alarm
+    )
+    VALUES(
+              #{ heartbeat,jdbcType=INTEGER},
+              #{ breath,jdbcType=INTEGER},
+              #{ OSA,jdbcType=INTEGER},
+              #{ sleepStage,jdbcType=INTEGER},
+              #{ state,jdbcType=VARCHAR},
+              #{ HRV,jdbcType=VARCHAR},
+              #{ deviceID,jdbcType=VARCHAR},
+              #{ key,jdbcType=INTEGER}
+        )
+    </insert>
+
+</mapper>

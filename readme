@@ -1,0 +1,43 @@
+文档说明：
+
+此部分代码用于接收数据、数据解码、存入数据库
+
+*************************************************************************
+
+伴随patientWXapiApplication主程序run方法启动，接收后进入TcpChannelInitializer
+
+TcpChannelInitializer内部流水线，在MsgPackDecoder内部处理数据
+
+MsgPackDecoder中decode方法处理，数据都是2个十六位组成，2个数据组成一个有效十进制数据：数据类似
+
+ba dc(校验) 49（长度） 36（校验和） 86 a3 4f 53 41 00 a2 62 72 12 a2 68 62 00 a2 73 70 00 a2 73 74 a3 6d 6f 76 a3 68 72 76 dc 00 28 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01
+
+提取数据后进入MattressDataService处理业务
+
+在MattressDataServiceImpl中addMattressData方法用于存储数据
+
+在各自的mybatis数据中可以对完成数据库的插入，插入用的纯sql语句，可以见MattressDao.xml
+
+*************************************************************************
+
+数据存储格式：
+
+数据表：
+deviceSM
+
+列名：		    数据类型：
+pid		        int(auto increment)
+create_time	    timestamp = CURRENT_TIMESTAMP
+heartbeat	    int
+breath		    int
+OSA		        int
+sleep_stage		int
+state		    varchar(255)
+HRV		        varchar(500)
+device_ID       varchar(255)
+alarm           int
+
+*************************************************************************
+
+在application.yml修改url（数据库对应的服务器地址、端口、数据库名称）
+

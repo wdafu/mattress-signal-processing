@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+
+
+option java_package="com.example.hospital.patient.wx.api.common";
+option java_multiple_files=true;
+option java_outer_classname ="MattressMessageProto";
+
+
+
+message PPDU{
+  int32     	data_type=1; // 数据类型
+  int32     	data_len_0=2; // bh_data数据长度
+  int32     	reserved=3; // 保留字节
+  int32		    crc8=4;	 // CRC8 校验
+  BH_Data   	  bh_data=5; // 数据体
+
+}
+enum  BH_Data{
+    device_id=0;
+    timestamp=1;
+    version=2; // 系统版本号
+    sensor=3; // 传感器
+    body_status=4; // 身体状态：0-离床（离床告警，无信号），1-在床，2-身体抽动，3-移动，4-离开（短时离床，离床时间足够长之后状态变为0）
+    breath=5;// 呼吸频率
+    heart=6; // 心率
+    breath_status=7; // 呼吸分析监测，0-正常，1-过缓，3-过急
+    heart_status=8; // 心脏分析监测，0-正常，1-过缓，2-严重过缓；4-过急，5-严重过急
+    snore_status=9; // 鼾声状态
+    ring_status=10; // 呼叫状态 0：无呼叫 1：发生呼叫
+    reserved_byte0=11; // 保留字节1
+    reserved_byte1=12;// 保留字节2
+    reserved_byte2=13;// 保留字节3
+
+
+
+}
